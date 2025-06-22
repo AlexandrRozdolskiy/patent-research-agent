@@ -77,46 +77,4 @@ The main user flow for AI analysis is robust and designed to handle various real
 
 <img src="static/flow.png" alt="UI Screenshot" width="50%">
 
-Diagram in mermaid:
-```mermaid
-graph TD
-    subgraph User Interaction
-        A[User Clicks "Analyze"]
-    end
-
-    subgraph FastAPI Backend
-        B[Endpoint: /analyze-inventor]
-        C{Cache Check}
-        E[Call OpenAI for Initial Analysis]
-        F[Perform LinkedIn Search via Bing]
-        F_sub[Analyze Bing Results w/ OpenAI]
-        G[Combine AI Analysis & LinkedIn URL]
-        H[Cache New Result]
-    end
-
-    subgraph External Services
-        I[OpenAI API]
-        J[Bing Search]
-    end
-    
-    subgraph Frontend Display
-        K[Display Results in UI]
-        L[Export to Excel]
-    end
-
-    A --> B;
-    B --> C;
-    C -- Found --> K;
-    C -- Not Found --> E;
-    E -- Uses --> I;
-    I -- Initial Analysis --> F;
-    F -- Uses --> J;
-    J -- Search Results --> F_sub;
-    F_sub -- Uses --> I;
-    I -- Final Profile URL --> G;
-    G --> H;
-    H --> K;
-    K --> L;
-```
-
 This diagram visually represents the step-by-step process from the user's click to the final display of the enriched data, including the caching logic and interactions with external services.
