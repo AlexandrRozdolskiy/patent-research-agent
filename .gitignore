@@ -1,0 +1,7 @@
+venv/
+.env
+cache*
+tests/
+debug*png
+.DS_Store
+search_results_log.json

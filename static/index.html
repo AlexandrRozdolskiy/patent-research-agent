@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patent Research Agent</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔬 Patent Research Agent</h1>
+            <p>Extract inventor information from USPTO patents using AI-powered automation</p>
+        </header>
+        
+        <main>
+            <div class="form-container">
+                <div class="input-group">
+                    <label for="patentNumbers">Patent Numbers (comma-separated):</label>
+                    <textarea 
+                        id="patentNumbers" 
+                        placeholder="Enter patent numbers separated by commas (e.g., 9876543, 7479949, 5960411)"
+                        rows="3"
+                    ></textarea>
+                </div>
+                <button onclick="researchPatents()" id="researchBtn">
+                    <span class="btn-text">Research Patents</span>
+                    <span class="btn-loading hidden">Processing...</span>
+                </button>
+            </div>
+            
+            <div id="loading" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Searching USPTO database...</p>
+                <div id="progressInfo" class="progress-info"></div>
+            </div>
+            
+            <div id="results" class="results hidden">
+                <div class="results-header">
+                    <h2>Patent Research Results</h2>
+                    <div class="results-actions">
+                        <button id="exportBtn" onclick="exportToExcel()" class="export-btn" disabled>
+                            📊 Export to Excel
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="table-container">
+                    <table id="resultsTable" class="results-table">
+                        <thead>
+                            <tr>
+                                <th>Patent #</th>
+                                <th>Inventors</th>
+                                <th>Publication Date</th>
+                                <th>Description</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody">
+                            <!-- Table rows will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div id="error" class="error hidden">
+                <h3>❌ Error</h3>
+                <p id="errorMessage">An error occurred while processing the patents.</p>
+            </div>
+            
+            <div class="examples-section">
+                <h3>Quick Test Examples:</h3>
+                <div class="example-patents">
+                    <a href="#" class="example-patent" data-patents="9876543,7479949,5960411">Small Batch (3)</a>
+                    <a href="#" class="example-patent" data-patents="6285999,9311703,10232250,10089093">Medium Batch (4)</a>
+                    <a href="#" class="example-patent" data-patents="8396204,7763011,8868375,10000772">Large Batch (4)</a>
+                </div>
+            </div>
+
+            <div id="aiAnalysisContainer" class="ai-analysis-container hidden">
+                <button id="aiAnalysisHeader" class="collapsible-header">
+                    <h3><span class="ai-emoji">🤖</span> AI Contact Analysis Details</h3>
+                    <span class="collapse-icon">[+]</span>
+                </button>
+                <div id="aiAnalysisContent" class="collapsible-content">
+                    <!-- Detailed AI analysis for each inventor will be rendered here -->
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <p>Powered by Playwright automation & USPTO data extraction</p>
+            <p><a href="/docs" target="_blank">API Documentation</a> | <a href="/health" target="_blank">Health Check</a></p>
+        </footer>
+    </div>
+    
+    <script src="/static/script.js"></script>
+</body>
+</html> 
